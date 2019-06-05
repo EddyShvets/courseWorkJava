@@ -1,0 +1,35 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/designTable.css}">
+    <link rel="stylesheet" th:href="@{/designLogout.css}">
+
+</head>
+<body background="#191919">
+<table class="myTable2" style="margin-left: 490px">
+    <h1 style="width: 100%;
+        text-align: center" >Pass statistics</h1>
+    <tr>
+        <th>id</th>
+        <th>turnstile</th>
+        <th>passes</th>
+        <th>date</th>
+    </tr>
+    <th:block th:each="pass : ${pass}">
+        <tr>
+            <td th:text="${pass.getId()}"></td>
+            <td th:text="${pass.getTurnstileId()}"></td>
+            <td th:text="${pass.getNumOfPasses()}"></td>
+            <td th:text="${pass.getCurrentDay()}"></td>
+        </tr>
+    </th:block>
+</table>
+
+<form class="box2" action="adminUrl" method="post">
+    <input type="submit" value="Logout" style="margin-left: 1100px; margin-top: 10px">
+
+    <input type="hidden" name="command" value="clickLogout">
+</form>
+</body>
+</html>

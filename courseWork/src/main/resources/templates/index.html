@@ -1,0 +1,170 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Turnstile</title>
+    <link rel="stylesheet" th:href="@{/design.css}">
+    <script>
+        (function () {
+            var path = document.location.pathname.replace(/^.*\/([^\/]+)$/, '$1');
+            window.onpopstate = function () {
+                history.pushState({}, "", path);
+            };
+            history.pushState({}, "", path);
+        })();
+    </script>
+</head>
+<body>
+
+
+<table>
+    <tr>
+        <td>
+            <form action="/myUrl" method="post">
+                <select name="selectTurnstile" th:disabled="${disabledButton}" onchange="this.form.submit()">
+                    <option value="turnstile0" th:selected="${selectedTurnstile0}">Turnstile#0</option>
+                    <option value="turnstile1" th:selected="${selectedTurnstile1}">Turnstile#1</option>
+                    <option value="turnstile2" th:selected="${selectedTurnstile2}">Turnstile#2</option>
+                    <option value="turnstile3" th:selected="${selectedTurnstile3}">Turnstile#3</option>
+                    <option value="turnstile4" th:selected="${selectedTurnstile4}">Turnstile#4</option>
+                </select>
+            </form>
+        </td>
+
+        <td>
+            <p class="errorMessage" th:text="${errorSensor}" style="margin-left: 300px"></p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p><img th:src="@{/img/cardReceiver.png}"
+                    alt="cardReceiver"
+                    style="margin-left: 65px;
+                        margin-top: 50px">
+            </p>
+        </td>
+        <td>
+            <form action="myUrl" method="post"
+                  style="display: inline-block;  margin-top: 70px;">
+                <input th:disabled="${disabledSensor1}"
+                       th:class="${sensor1Color}"
+                       type="submit"
+                       name="sensor1"
+                       value="Sensor1"
+                       style="margin-left: 150px"/>
+                <input type="hidden" name="command" value="clickSensor1">
+            </form>
+
+            <form action="myUrl" method="post"
+                  style="display: inline-block;  margin-top: 70px;">
+                <input th:disabled="${disabledSensor2}"
+                       th:class="${sensor2Color}"
+                       type="submit"
+                       name="sensor2"
+                       value="Sensor2"
+                       style="margin-left: 25px"/>
+                <input type="hidden" name="command" value="clickSensor2">
+            </form>
+
+            <form action="myUrl" method="post"
+                  style="display: inline-block;  margin-top: 70px;">
+                <input th:disabled="${disabledSensor3}"
+                       th:class="${sensor3Color}"
+                       type="submit"
+                       name="sensor3"
+                       value="Sensor3"
+                       style="margin-left: 25px"/>
+                <input type="hidden" name="command" value="clickSensor3">
+            </form>
+        </td>
+
+        <td>
+            <form action="myUrl" method="post">
+                <input th:disabled="${disabledButton}"
+                       type="submit"
+                       class="buttonInsertToDB"
+                       name="toDB"
+                       value="DB">
+                <input type="hidden" name="command" value="clickDb">
+            </form>
+        </td>
+
+        <td>
+            <form action="myUrl" method="post">
+                <p class="errorMessage" th:text="${errorMessage}"></p>
+                <input th:disabled="${disabledButton}" type="text" name="login" placeholder="Login" required>
+                <br>
+                <input th:disabled="${disabledButton}" type="password" name="password" placeholder="Password" required>
+                <br>
+                <input th:disabled="${disabledButton}" type="submit" value="Submit">
+
+                <input type="hidden" name="command" value="clickLogin">
+            </form>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <form action="myUrl" method="post" style="display: inline-block">
+                <input th:disabled="${disabledButton}"
+                       class="myAnotherClass"
+                       type="submit"
+                       name="button1"
+                       value="Attach a valid card"
+                       style="margin-left: 50px;
+                          margin-top: 50px"/>
+                <input type="hidden" name="command" value="clickButton1">
+            </form>
+
+            <br/>
+
+            <form action="myUrl" method="post" style="display: inline-block">
+                <input th:disabled="${disabledButton}"
+                       class="myAnotherClass"
+                       type="submit"
+                       name="button2"
+                       value="Attach an invalid card (expiration date)"
+                       style="margin-left: 50px;
+                           margin-top: 50px"/>
+                <input type="hidden" name="command" value="clickButton2">
+            </form>
+
+            <br/>
+
+            <form action="myUrl" method="post" style="display: inline-block">
+                <input th:disabled="${disabledButton}"
+                       class="myAnotherClass"
+                       type="submit"
+                       name="button3"
+                       value="Attach an invalid card (number of trips)"
+                       style="margin-left: 50px;
+                           margin-top: 50px"/>
+                <input type="hidden" name="command" value="clickButton3">
+            </form>
+        </td>
+
+        <td>
+            <p><img th:src="${indicatorImage}"
+                    alt="indicator"
+                    style="margin-left: 225px;
+                        margin-top: 50px">
+            </p>
+        </td>
+    </tr>
+</table>
+
+<script>
+    /*<![CDATA[*/
+
+    var refreshSeconds = [[${refreshSeconds}]];
+    if (refreshSeconds != null) {
+        setTimeout(function () {
+            window.location = window.location;
+        }, refreshSeconds * 1000)
+    }
+
+    /*]]>*/
+</script>
+
+</body>
+</html>
